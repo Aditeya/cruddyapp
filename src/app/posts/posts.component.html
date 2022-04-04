@@ -1,0 +1,16 @@
+<h2>Posts</h2>
+<button (click)="reload()">Reload</button>
+<table>
+    <tr>
+        <td>id</td>
+        <td>userId</td>
+        <td>title</td>
+        <td>body</td>
+    </tr>
+    <tr *ngFor="let post of posts | async">
+        <td>{{post.id}}</td>
+        <td>{{post.userId}}</td>
+        <td>{{post.title}}</td>
+        <td>{{post.body}}</td>
+    </tr>
+</table>
