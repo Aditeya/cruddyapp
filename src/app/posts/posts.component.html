@@ -1,6 +1,9 @@
 <div class="container-fluid">
     <h2><mark><code>[GET]</code></mark> Posts</h2>
 
+
+    <label for="userId">User ID </label>
+    <input id="userId" class="form-control" [(ngModel)]="userId" type="text" pattern="\d+">
     <button class="btn btn-primary" (click)="reload()">Reload</button>
 
     <table class="table table-striped table-bordered">

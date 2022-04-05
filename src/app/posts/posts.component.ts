@@ -8,6 +8,7 @@ import { PostsService } from './posts.service';
 })
 export class PostsComponent implements OnInit {
   posts;
+  userId: string = '';
 
   constructor(private service: PostsService) { 
     this.posts = this.service.getPosts();
@@ -18,7 +19,7 @@ export class PostsComponent implements OnInit {
   
   reload() {
     console.log('Reloading');
-    this.posts = this.service.getPosts();
+    this.posts = this.service.getPosts(this.userId);
     console.log('Reloaded');
   }
 
