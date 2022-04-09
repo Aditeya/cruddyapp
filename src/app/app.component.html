@@ -1,7 +1,16 @@
-<div class="container-fluid">
-  <h1><mark>CRUD</mark>DY APP</h1>
-  <p>API from <a target="_blank" href="https://jsonplaceholder.typicode.com/"><code>jsonplaceholder.typicode.com</code></a></p>
-  <app-post-creater></app-post-creater>
-  <app-posts></app-posts>
+<div class="container-fluid d-flex flex-column">
+	<div class="row">
+		<h1><mark>CRUD</mark>DY APP</h1>
+		<p>
+			API from
+			<a target="_blank" href="https://jsonplaceholder.typicode.com/">
+				<code>jsonplaceholder.typicode.com</code>
+			</a>
+		</p>
+	</div>
+	<div class="row">
+		<app-post-creater class="col-md-4"></app-post-creater>
+		<app-posts class="col-md-8"></app-posts>
+	</div>
 </div>
 <router-outlet></router-outlet>
