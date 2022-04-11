@@ -1,8 +1,7 @@
 <div class="container">
 	<h2>Create / Update / Delete Posts</h2>
-	<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-		<div
-			class="form-group custom-control custom-radio custom-control-inline">
+	<form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="row g-3">
+		<div class="col-12">
 			<div *ngFor="let value of radioButtonValues" class="form-check">
 				<input
 					type="radio"
@@ -17,7 +16,7 @@
 			</div>
 		</div>
 
-		<div class="form-group">
+		<div class="col-6" *ngIf="resttype?.value !== 'delete'">
 			<label for="userId">User ID </label>
 			<input
 				formControlName="userId"
@@ -30,8 +29,8 @@
 				pattern="\d+" />
 		</div>
 
-		<div class="form-group">
-			<label for="id">ID </label>
+		<div class="col-6" *ngIf="resttype?.value !== 'create'">
+			<label for="id">Post ID</label>
 			<input
 				formControlName="id"
 				id="id"
@@ -40,8 +39,8 @@
 				pattern="\d+" />
 		</div>
 
-		<div class="form-group">
-			<label for="title">Title </label>
+		<div class="col-12" *ngIf="resttype?.value !== 'delete'">
+			<label for="title">Title</label>
 			<input
 				formControlName="title"
 				id="title"
@@ -49,15 +48,17 @@
 				type="text" />
 		</div>
 
-		<div class="form-group">
-			<label for="body">Body </label>
+		<div class="col-12" *ngIf="resttype?.value !== 'delete'">
+			<label for="body">Body</label>
 			<textarea
 				formControlName="body"
 				id="body"
 				class="form-control"></textarea>
 		</div>
 
-		<button class="btn btn-primary">Submit</button>
+		<div class="col-12">
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
 	</form>
 
 	<br />

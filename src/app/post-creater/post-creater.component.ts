@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Post } from '../post';
 import { PostCreaterService } from './post-creater.service';
@@ -20,7 +20,14 @@ export class PostCreaterComponent implements OnInit {
 	) {
 		this.postForm = this.fb.group({
 			resttype: '',
-			id: '',
+			id: [
+				null,
+				[
+					Validators.required,
+					Validators.minLength(1),
+					Validators.min(1),
+				],
+			],
 			userId: '',
 			title: '',
 			body: '',
@@ -58,5 +65,9 @@ export class PostCreaterComponent implements OnInit {
 				break;
 			default:
 		}
+	}
+
+	get resttype() {
+		return this.postForm.get('resttype');
 	}
 }
