@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Post } from '../post';
 import { PostsService } from './posts.service';
 
 @Component({
@@ -7,16 +8,24 @@ import { PostsService } from './posts.service';
 	styleUrls: ['./posts.component.css'],
 })
 export class PostsComponent {
-	posts;
+	posts: Post[];
 	userId = '';
 
 	constructor(private service: PostsService) {
-		this.posts = this.service.getPosts();
+		//this.posts = this.service.getPosts();
+		this.posts = [];
+	}
+
+	ngOnInit() {
+		this.service.getPosts().subscribe(posts => {
+			this.posts = posts;
+		});
 	}
 
 	reload() {
-		console.log('Reloading');
-		this.posts = this.service.getPosts(this.userId);
-		console.log('Reloaded');
+		//this.posts = this.service.getPosts(this.userId);
+		this.service.getPosts(this.userId).subscribe(posts => {
+			this.posts = posts;
+		});
 	}
 }

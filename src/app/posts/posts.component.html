@@ -30,12 +30,14 @@
 				</tr>
 			</thead>
 			<tbody class="overflow-scroll">
-				<tr *ngFor="let post of posts | async">
-					<td>{{ post.id }}</td>
-					<td>{{ post.userId }}</td>
-					<td>{{ post.title }}</td>
-					<td>{{ post.body }}</td>
-				</tr>
+				<ng-container *ngFor="let post of posts">
+					<tr *ngIf="true">
+						<td>{{ post.id }}</td>
+						<td>{{ post.userId }}</td>
+						<td>{{ post.title }}</td>
+						<td>{{ post.body }}</td>
+					</tr>
+				</ng-container>
 			</tbody>
 		</table>
 	</div>
