@@ -24,13 +24,22 @@ export class PostCreaterComponent implements OnInit {
 				null,
 				[
 					Validators.required,
+					Validators.pattern('[0-9]+'),
 					Validators.minLength(1),
 					Validators.min(1),
 				],
 			],
-			userId: '',
-			title: '',
-			body: '',
+			userId: [
+				null,
+				[
+					Validators.required,
+					Validators.pattern('[0-9]+'),
+					Validators.minLength(1),
+					Validators.min(1),
+				],
+			],
+			title: ['', [Validators.required, Validators.minLength(1)]],
+			body: ['', [Validators.required, Validators.minLength(1)]],
 		});
 	}
 
@@ -67,7 +76,41 @@ export class PostCreaterComponent implements OnInit {
 		}
 	}
 
+	isFormValid() {
+		switch (this.resttype?.value) {
+			case 'create':
+				return (
+					this.userId?.invalid ||
+					this.title?.invalid ||
+					this.body?.invalid
+				);
+			case 'update':
+				return (
+					this.userId?.invalid ||
+					this.id?.invalid ||
+					this.title?.invalid ||
+					this.body?.invalid
+				);
+			case 'delete':
+				return this.id?.invalid;
+			default:
+				return this.postForm.invalid;
+		}
+	}
+
 	get resttype() {
 		return this.postForm.get('resttype');
+	}
+	get userId() {
+		return this.postForm.get('userId');
+	}
+	get id() {
+		return this.postForm.get('id');
+	}
+	get title() {
+		return this.postForm.get('title');
+	}
+	get body() {
+		return this.postForm.get('body');
 	}
 }
