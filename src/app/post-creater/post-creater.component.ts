@@ -29,6 +29,7 @@ export class PostCreaterComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.postForm.valueChanges.subscribe(console.log);
+		this.postForm.patchValue({ resttype: 'create' });
 	}
 
 	log(x: any) {

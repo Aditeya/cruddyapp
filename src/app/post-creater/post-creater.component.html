@@ -3,15 +3,15 @@
 	<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
 		<div
 			class="form-group custom-control custom-radio custom-control-inline">
-			<div *ngFor="let value of radioButtonValues">
+			<div *ngFor="let value of radioButtonValues" class="form-check">
 				<input
 					type="radio"
-					class="custom-control-input"
+					class="form-check-input"
 					[id]="value"
 					[value]="value"
 					name="resttype"
 					formControlName="resttype" />
-				<label [for]="value" class="custom-control-label">
+				<label [for]="value" class="form-check-label">
 					{{ value.charAt(0).toUpperCase() + value.substring(1) }}
 				</label>
 			</div>

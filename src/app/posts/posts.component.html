@@ -1,16 +1,23 @@
 <div class="container-fluid">
 	<h2>Posts</h2>
 
-	<label for="userId">User ID </label>
-	<input
-		id="userId"
-		class="form-control"
-		[(ngModel)]="userId"
-		type="text"
-		pattern="\d+" />
-	<button class="btn btn-primary" (click)="reload()">Reload</button>
+	<div class="row g-3">
+		<label for="userId" class="col-auto col-form-label">User ID </label>
+		<div class="col-auto">
+			<input
+				id="userId"
+				class="form-control"
+				placeholder="User ID"
+				[(ngModel)]="userId"
+				type="text"
+				pattern="\d+" />
+		</div>
+		<div class="col-md">
+			<button class="btn btn-primary" (click)="reload()">Reload</button>
+		</div>
+	</div>
 
-	<div class="table">
+	<div class="row posttable table-responsive m-2">
 		<table class="table table-fixed table-striped table-bordered">
 			<thead>
 				<tr>
