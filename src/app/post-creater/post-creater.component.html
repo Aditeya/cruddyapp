@@ -23,6 +23,11 @@
 				id="userId"
 				class="form-control"
 				type="text" />
+			<div
+				class="invalid-feedback d-inline"
+				*ngIf="userId?.touched && userId?.invalid">
+				User ID should be a number
+			</div>
 		</div>
 
 		<div class="col-6" *ngIf="resttype?.value !== 'create'">
@@ -32,6 +37,11 @@
 				id="id"
 				class="form-control"
 				type="text" />
+			<div
+				class="invalid-feedback d-inline"
+				*ngIf="id?.touched && id?.invalid">
+				Post ID should be a number
+			</div>
 		</div>
 
 		<div class="col-12" *ngIf="resttype?.value !== 'delete'">
@@ -41,6 +51,15 @@
 				id="title"
 				class="form-control"
 				type="text" />
+			<div
+				class="invalid-feedback d-inline"
+				*ngIf="
+					title?.touched &&
+					title?.invalid &&
+					resttype?.value !== 'update'
+				">
+				Title shouldn't be empty
+			</div>
 		</div>
 
 		<div class="col-12" *ngIf="resttype?.value !== 'delete'">
@@ -49,6 +68,15 @@
 				formControlName="body"
 				id="body"
 				class="form-control"></textarea>
+			<div
+				class="invalid-feedback d-inline"
+				*ngIf="
+					body?.touched &&
+					body?.invalid &&
+					resttype?.value !== 'update'
+				">
+				Body shouldn't be empty
+			</div>
 		</div>
 
 		<div class="col-12">

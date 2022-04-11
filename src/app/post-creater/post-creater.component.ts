@@ -85,12 +85,7 @@ export class PostCreaterComponent implements OnInit {
 					this.body?.invalid
 				);
 			case 'update':
-				return (
-					this.userId?.invalid ||
-					this.id?.invalid ||
-					this.title?.invalid ||
-					this.body?.invalid
-				);
+				return this.userId?.invalid || this.id?.invalid;
 			case 'delete':
 				return this.id?.invalid;
 			default:
