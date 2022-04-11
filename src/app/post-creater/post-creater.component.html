@@ -89,6 +89,7 @@
 		</div>
 	</form>
 
-	<br />
-	{{ returnPost | async | json }}
+	<div *ngIf="this.postSuccess" class="alert alert-success" role="alert">
+		Success!
+	</div>
 </div>

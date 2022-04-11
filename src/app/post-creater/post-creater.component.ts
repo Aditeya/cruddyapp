@@ -11,6 +11,7 @@ import { PostCreaterService } from './post-creater.service';
 })
 export class PostCreaterComponent implements OnInit {
 	returnPost: Observable<any> | undefined;
+	postSuccess = false;
 	postForm: FormGroup;
 	radioButtonValues = ['create', 'update', 'delete'];
 
@@ -44,12 +45,8 @@ export class PostCreaterComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.postForm.valueChanges.subscribe(console.log);
+		//this.postForm.valueChanges.subscribe(console.log);
 		this.postForm.patchValue({ resttype: 'create' });
-	}
-
-	log(x: any) {
-		console.log(x);
 	}
 
 	onSubmit() {
@@ -60,17 +57,21 @@ export class PostCreaterComponent implements OnInit {
 			body: this.postForm.value.body,
 		};
 
+		this.returnPost = undefined;
 		switch (this.postForm.value.resttype) {
 			case 'create':
 				this.returnPost = this.pcService.createPost(post);
+				if (this.returnPost) this.postSuccess = true;
 				break;
 			case 'update':
 				this.returnPost = this.pcService.updatePostPartial(post);
+				if (this.returnPost) this.postSuccess = true;
 				break;
 			case 'delete':
 				this.returnPost = this.pcService.deletePost(
 					this.postForm.value.id
 				);
+				this.postSuccess = true;
 				break;
 			default:
 		}
