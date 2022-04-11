@@ -1,5 +1,5 @@
 <div class="container">
-	<h2>REST Form</h2>
+	<h2>Create / Update / Delete Posts</h2>
 	<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
 		<div
 			class="form-group custom-control custom-radio custom-control-inline">
@@ -11,11 +11,9 @@
 					[value]="value"
 					name="resttype"
 					formControlName="resttype" />
-				<label [for]="value" class="custom-control-label"
-					><mark
-						><code>{{ value.toUpperCase() }}</code></mark
-					></label
-				>
+				<label [for]="value" class="custom-control-label">
+					{{ value.charAt(0).toUpperCase() + value.substring(1) }}
+				</label>
 			</div>
 		</div>
 

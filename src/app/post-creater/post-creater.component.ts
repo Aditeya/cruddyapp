@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Post } from '../post';
 import { PostCreaterService } from './post-creater.service';
@@ -12,7 +12,7 @@ import { PostCreaterService } from './post-creater.service';
 export class PostCreaterComponent implements OnInit {
 	returnPost: Observable<any> | undefined;
 	postForm: FormGroup;
-	radioButtonValues = ['post', 'put', 'patch', 'delete'];
+	radioButtonValues = ['create', 'update', 'delete'];
 
 	constructor(
 		private fb: FormBuilder,
@@ -44,13 +44,10 @@ export class PostCreaterComponent implements OnInit {
 		};
 
 		switch (this.postForm.value.resttype) {
-			case 'post':
+			case 'create':
 				this.returnPost = this.pcService.createPost(post);
 				break;
-			case 'put':
-				this.returnPost = this.pcService.updatePostFull(post);
-				break;
-			case 'patch':
+			case 'update':
 				this.returnPost = this.pcService.updatePostPartial(post);
 				break;
 			case 'delete':
