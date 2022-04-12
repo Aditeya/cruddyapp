@@ -19,13 +19,21 @@ export class PostsComponent {
 	ngOnInit() {
 		this.service.getPosts().subscribe(posts => {
 			this.posts = posts;
+			for (let i = 0; i < this.posts.length; i++) {
+				this.posts[i].visible = true;
+			}
 		});
 	}
 
-	reload() {
-		//this.posts = this.service.getPosts(this.userId);
-		this.service.getPosts(this.userId).subscribe(posts => {
-			this.posts = posts;
-		});
+	filter() {
+		if (!this.userId)
+			for (let i = 0; i < this.posts.length; i++)
+				this.posts[i].visible = true;
+		else
+			this.posts = this.posts.map(d => {
+				//if (d.userId !== Number(this.userId)) d.visible = false;
+				d.visible = d.userId === Number(this.userId);
+				return d;
+			});
 	}
 }
