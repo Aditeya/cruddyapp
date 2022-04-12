@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Post } from '../post';
+import { PostEvent } from '../postEvent';
 import { PostCreaterService } from './post-creater.service';
 
 @Component({
@@ -10,10 +11,12 @@ import { PostCreaterService } from './post-creater.service';
 	styleUrls: ['./post-creater.component.css'],
 })
 export class PostCreaterComponent implements OnInit {
-	returnPost: Observable<any> | undefined;
+	returnPost: Observable<any> | undefined | Post;
 	postSuccess = false;
 	postForm: FormGroup;
 	radioButtonValues = ['create', 'update', 'delete'];
+
+	@Output() event = new EventEmitter<PostEvent>();
 
 	constructor(
 		private fb: FormBuilder,
@@ -58,19 +61,28 @@ export class PostCreaterComponent implements OnInit {
 		};
 
 		this.returnPost = undefined;
+		this.postSuccess = false;
 		switch (this.postForm.value.resttype) {
 			case 'create':
-				this.returnPost = this.pcService.createPost(post);
-				if (this.returnPost) this.postSuccess = true;
+				this.pcService.createPost(post).subscribe(d => {
+					this.returnPost = d;
+					this.postSuccess = true;
+					this.event.emit({ post: d, action: 'create' });
+				});
 				break;
 			case 'update':
-				this.returnPost = this.pcService.updatePostPartial(post);
-				if (this.returnPost) this.postSuccess = true;
+				this.pcService.updatePostPartial(post).subscribe(d => {
+					this.returnPost = d;
+					this.postSuccess = true;
+					this.event.emit({ post: d, action: 'update' });
+				});
 				break;
 			case 'delete':
-				this.returnPost = this.pcService.deletePost(
-					this.postForm.value.id
-				);
+				this.pcService.deletePost(this.postForm.value.id);
+				this.event.emit({
+					id: this.postForm.value.id,
+					action: 'delete',
+				});
 				this.postSuccess = true;
 				break;
 			default:

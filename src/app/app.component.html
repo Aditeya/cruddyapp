@@ -9,8 +9,10 @@
 		</p>
 	</div>
 	<div class="row">
-		<app-post-creater class="col-md-4"></app-post-creater>
-		<app-posts class="col-md-8"></app-posts>
+		<app-post-creater
+			class="col-md-4"
+			(event)="this.event = $event"></app-post-creater>
+		<app-posts class="col-md-8" [event]="this.event"></app-posts>
 	</div>
 </div>
 <router-outlet></router-outlet>
