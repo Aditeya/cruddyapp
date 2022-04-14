@@ -98,12 +98,27 @@ export class PostCreaterComponent implements OnInit {
 					this.body?.invalid
 				);
 			case 'update':
-				return this.userId?.invalid || this.id?.invalid;
+				return (
+					this.userId?.invalid ||
+					this.id?.invalid ||
+					this.title?.invalid ||
+					this.body?.invalid
+				);
 			case 'delete':
 				return this.id?.invalid;
 			default:
 				return this.postForm.invalid;
 		}
+	}
+
+	reset() {
+		this.postSuccess = false;
+		this.postForm.reset();
+		this.postForm.patchValue({ resttype: 'create' });
+		//this.userId?.reset();
+		//this.id?.reset();
+		//this.title?.reset();
+		//this.body?.reset();
 	}
 
 	get resttype() {
